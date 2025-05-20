@@ -25,7 +25,7 @@ for i, filename in enumerate(filenames):
     plt.title(f"{path.basename(filename)}")
     plt.axis("off")
 
-# Creating training dataset directly from directory
+# Creating training dataset directly from a directory
 train_ds = utils.image_dataset_from_directory(
     directory="dataset/dishes/",
     labels="inferred",
@@ -36,7 +36,7 @@ train_ds = utils.image_dataset_from_directory(
     seed=RANDOM_SEED,
     validation_split=0.1)
 
-# Creating evaluation dataset directly from directory
+# Creating evaluation dataset directly from a directory
 validation_ds = utils.image_dataset_from_directory(
     directory="dataset/dishes/",
     labels="inferred",
@@ -50,7 +50,7 @@ validation_ds = utils.image_dataset_from_directory(
 # Create input layer
 inputs = Input(shape=INPUT_SHAPE)
 
-# Use EfficientNetB0 as basic model
+# Use EfficientNetB0 as a basic model
 basic_model = EfficientNetB0(include_top=False, input_tensor=inputs, weights="imagenet")
 
 # Freeze the pretrained weights
@@ -62,7 +62,7 @@ outputs = BatchNormalization()(outputs)
 outputs = Dropout(0.2, name="top_dropout")(outputs)
 outputs = Dense(NUM_CLASSES, activation="softmax", name="pred")(outputs)
 
-# Merge to new model
+# Merge to a new model
 model = Model(inputs, outputs)
 
 # Print model summary
